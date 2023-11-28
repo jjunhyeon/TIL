@@ -78,7 +78,8 @@ JVM에 생성된 Heap Area에 존재하는 StringBuilder에 동시에 여러 Thr
 따라서, 멀티쓰레드 환경에서는 StringBuffer 를 활용해 동기화(Synchronized) 를 활용해 개발해야 안전하게 처리 할 수 있습니다.
 
 ✔️ Synchronized
-자바에서 이 키워드는 여러개의 스레드가 한 개의 자원에 접근하려 할 때, 현재 데이터를 사용하고 있는 스레드를 제외하곤 데이터에 접근 할 수 없도록 막는 역할을 한다.
+
+여러개의 스레드가 한 개의 자원에 접근하려 할 때, 현재 데이터를 사용하고 있는 스레드를 제외하곤 데이터에 접근 할 수 없도록 막는 역할을 함.
 
 
 <br>
@@ -87,8 +88,8 @@ JVM에 생성된 Heap Area에 존재하는 StringBuilder에 동시에 여러 Thr
 
 **결론**
 - String은 짧은 문자열 연산을 하는 경우에 사용한다.
-- StringBuffer는 쓰레드에 안전한 프로그램 개발시, StringBuilder는 스레드 안전여부에 상관없는 프로그램 개발 시 사용하는것이 좋다.
- - 단순히 성능만을 고려한다면 StringBuilder > StringBuffer > String
+- StringBuffer는 쓰레드에 안전한 프로그램 개발시, StringBuilder는 스레드 안전여부에 상관없는 프로그램 개발 시 사용한다.
+- 단순히 성능만을 고려한다면 StringBuilder > StringBuffer > String
 
 
 
