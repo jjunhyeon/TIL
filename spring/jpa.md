@@ -1,5 +1,5 @@
 
-jpa에 내용 정리 - 기본
+# jpa에 내용 정리(1)
 
 ### 개요
 
@@ -37,7 +37,7 @@ JPA가 뭔지 알기 위해 검색해보면 나오는게 `Java Persistence API`�
 </br>
 </br>
 
-### JPA 특징
+### JPA 동작 원리
 
 ✔️ ORM(Object-relational mapping)
 - 객체 관계 매핑
@@ -53,7 +53,7 @@ ORM이라는 개념은 `객체와 관계형데이터베이스를 중간에 매�
 </br>
 </br>
 
-<center> Java 애플리케이션과 JPA </center>
+>Java 애플리케이션과 JPA
 
 ![Jpa](./image/jpa그림.png)
 원래는 자바 개발자가 `JDBC API`를 사용해 개발을 했었다면 `JPA`가 중간에서 DB 작업을 해주고 있다.
@@ -61,7 +61,7 @@ ORM이라는 개념은 `객체와 관계형데이터베이스를 중간에 매�
 </br>
 </br>
 
-<center> JPA의 내부 동작 상세</center>
+JPA의 내부 동작 상세
 
 ![JPA-detail](./image/jpa상세그림.png)
 
