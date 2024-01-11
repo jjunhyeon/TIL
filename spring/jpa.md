@@ -37,7 +37,7 @@ JPA가 뭔지 알기 위해 검색해보면 나오는게 `Java Persistence API`�
 </br>
 </br>
 
-### JPA 동작 원리
+### JPA 구조
 
 ✔️ ORM(Object-relational mapping)
 - 객체 관계 매핑
