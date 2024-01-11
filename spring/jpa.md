@@ -61,7 +61,7 @@ ORM이라는 개념은 `객체와 관계형데이터베이스를 중간에 매�
 </br>
 </br>
 
-JPA의 내부 동작 상세
+>JPA의 내부 동작 상세
 
 ![JPA-detail](./image/jpa상세그림.png)
 
