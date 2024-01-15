@@ -112,7 +112,7 @@ public class Member {
 </br>
 </br>
 
-✔️ @Euumerated
+✔️ @Enumerated
 
 자바의 Enum 타입의 데이터를 매핑시켜줄때 사용하는 어노테이션으로 파라미터 값으로
 
