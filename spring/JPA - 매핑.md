@@ -157,7 +157,7 @@ public enum TemporalType {
 
 </br>
 
-하지만 `자바 1.8` 이후 ***LocalDate***와 ***LocalDateTime***을 사용할 수 있기 때문에 위를 무시하고 필드 정보에 ***LocalDate***, ***LocalDateTime***을 사용하는게 더 편리하다.
+하지만 `자바 1.8` 버전부터  ***LocalDate***와 ***LocalDateTime***을 사용할 수 있고 필드 타입을 ***LocalDate***, ***LocalDateTime***을 사용하면 DB에서 맞춰 `DATE` 타입 또는 `TIMESTAMP` 타입으로 생성해준다.
 
 </br>
 </br>
