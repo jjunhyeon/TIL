@@ -110,6 +110,7 @@ public class Member {
 아래는 헷갈리는 어노테이션에 대한 이해를 돕기 위한 내용이다. 
 
 ✔️ @Euumerated
+
 자바의 Enum 타입의 데이터를 매핑시켜줄때 사용하는 어노테이션으로 파라미터 값으로
 
 숫자형 데이터 `ORDINAL`, 문자형 타입이라면 `STRING` 으로 사용하고 기본 값은 `ORDINAL`이다. 
