@@ -3,18 +3,18 @@
 
 2024년 배우고 싶은 기술을 *Apache Kafka*  로 정했다
 
-그 이유로는 데이터가 가장 중요한 시대에 살아가고 있는 지금 그 중심엔 카프카가 있다고 생각했다.
+데이터가 가장 중요한 시대에 살아가고 있는 지금 이를 이해하고 다루기 위해선 카프카가 필요했다.
 
 카프카의 역할이 애플리케이션에 발생하는 다양한 데이터를 스트리밍 처리하는 기술이기 때문이다.
 
-물론 Kafka는 현재까지도 계속 발전하고 있는 학습하기 어려운 기술이지만 할 수 있을거다.
-
-며칠전 서점에서 [카프카 - 핵심 가이드](https://www.yes24.com/Product/Goods/118397432?pid=123487&cosemkid=go16824830298205674&gad_source=1&gclid=Cj0KCQiA-62tBhDSARIsAO7twbZGc00lrvYMBk4t_b_5lmMti_rbupL0YCePMnYXm6_n4LaMndidhiwaAi5XEALw_wcB) 책을 샀다.
+그래서 며칠전 서점에서 [카프카 - 핵심 가이드](https://www.yes24.com/Product/Goods/118397432?pid=123487&cosemkid=go16824830298205674&gad_source=1&gclid=Cj0KCQiA-62tBhDSARIsAO7twbZGc00lrvYMBk4t_b_5lmMti_rbupL0YCePMnYXm6_n4LaMndidhiwaAi5XEALw_wcB) 책을 샀다.
 (서점에서 33,000원 주고 샀는데 온라인은 10% 할인하네....)
 
-기본 개념적인 내용, 설치, 실습, 최적화에 대한 내용까지 정리해보겠다.
+</br>
 
-이번 글은 카프카에 대한 학습을 시작하는 글로 앞으로 자주 볼 키워드, 카프카의 역할에 대해 이해하는것을 목표로 두고 정리하겠다.
+이번 글은 `카프카`의 학습의 시작이며, 간단하게 기본 개념적인 내용, 설치, 실습, 최적화에 대한 내용을 정리하겠다.
+
+</br>
 
 > 본글에서 사용하는 모든 이미지는 ***아파치 카프카 애플리케이션 프로그래밍 with 자바, 카프가 핵심 가이드*** 에 출처가 있습니다.
 --- 
