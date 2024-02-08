@@ -3,10 +3,6 @@
 
 2024년 배우고 싶은 기술을 *Apache Kafka*  로 정했다
 
-데이터가 가장 중요한 시대에 살아가고 있는 지금 이를 이해하고 다루기 위해선 카프카가 필요했다.
-
-카프카의 역할이 애플리케이션에 발생하는 다양한 데이터를 스트리밍 처리하는 기술이기 때문이다.
-
 그래서 며칠전 서점에서 [카프카 - 핵심 가이드](https://www.yes24.com/Product/Goods/118397432?pid=123487&cosemkid=go16824830298205674&gad_source=1&gclid=Cj0KCQiA-62tBhDSARIsAO7twbZGc00lrvYMBk4t_b_5lmMti_rbupL0YCePMnYXm6_n4LaMndidhiwaAi5XEALw_wcB) 책을 샀다.
 (서점에서 33,000원 주고 샀는데 온라인은 10% 할인하네....)
 
