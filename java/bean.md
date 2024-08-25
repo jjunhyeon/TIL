@@ -14,7 +14,6 @@
 
 xml을 이용해 등록하는 방법으로는 <bean id= "userService" class="com.study.app.userService" />  등을 활용해 
 
-<br>
 
 ####  2 어노테이션을 이용하는 방법 
 
@@ -27,7 +26,6 @@ xml을 이용해 등록하는 방법으로는 <bean id= "userService" class="com
 우리가 일반적으로 흔히 사용하고 있는 @Controller, @Service, @Repository 등의 어노테이션이 빈으로 사용할 수 있는것은 위 @Component 를 상속받아 만들어졌기 때문입니다.
 정리하면 빈은 인스턴스화된 객체를 의미하며 스프링 컨테이너에 등록해 사용하는 이유는
 
- 
 <br>
 <br>
 
