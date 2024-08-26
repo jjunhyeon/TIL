@@ -12,7 +12,7 @@
 
 ####  1.xml을 이용해 등록하는 방법
 
-xml을 이용해 등록하는 방법으로는 <bean id= "userService" class="com.study.app.userService" />  등을 활용해 
+xml을 이용해 등록하는 방법으로는 <bean id= "userService" class="com.study.app.userService" />  처럼 작성해 빈을 등록할 수 있다.
 
 
 ####  2 어노테이션을 이용하는 방법 
