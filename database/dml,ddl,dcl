@@ -1,17 +1,16 @@
 
 
-✅  Purpose 
-기본적인 내용이지만 용어를 혼란스럽게 사용하는것을 방지하고 명확히 개념을 다잡기 위해 정리합니다.
+## 📌 ** 목적 **
+### 기본적인 내용이지만 용어를 혼란스럽게 사용하는것을 방지하고 명확히 개념을 다잡기 위해 정리합니다.
 
 
-✅  내용
+## 📌 ** 내용 **
+
 1. DML(Data Maniulation Language) : 데이터 조작어
 
 * Purpose 
 기본적인 내용이지만 용어를 혼란스럽게 사용하는것을 방지하고 명확히 개념을 다잡기 위해 정리합니다.
 
-
-* 내용
 1. DML(Data Maniulation Language) : 데이터 조작(Manipulation)어, Manipulation 이라는 단어를 생각
 - SELECT : 데이터베이스의 데이터를 조회하거나 검색하기 위한 명령어
 - INSERT,UPDATE,DELETE : 데이터베이스의 테이블에 들어 있는 데이터에 변형을 가하는 종류(데이터 삽입, 수정 , 삭제) 의 명령어
@@ -33,8 +32,9 @@
 - COMMIT, ROLLBACK 등
 
 
-✅  기타
-** TRUNCATE? **
+## ✅  기타
+
+### ** TRUNCATE? **
 - 정리하다가,  DELETE ALL = TRUNCATE인데 왜 DDL에 속하는걸까?
 
 => 결과적으로 말하면, TRUNCATE는 단순한 데이터 삭제가 아닌 전체 테이블을 초기화하기 때문이다.
