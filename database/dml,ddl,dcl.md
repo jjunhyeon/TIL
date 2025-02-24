@@ -19,11 +19,14 @@
 
 => 흔히 SQL이라고도 하며 개발자 레벨에서 가장 많이 접하게 되는 명령어이다.
 
+</br>
 
 2. DDL(Data Definition Language) : 데이터 정의(Definition)어
 - CREATE, ALTER, DROP, RENAME, TRUNCATE : 테이블과 같은 데이터 구조를 정의하는데 사용되는 명령어로(생성, 변경, 삭제) 와 같은 
 데이터 구조와 관련된 명령어들을 말함
 
+</br>
+ 
 3. DCL(Data Control Language) : 데이터베이스에 접근하고 객체들을 사용하도록 권한을 주고 회수하는 명령어들을 말한다.
 - Grant
  : ex) Grant SELECT,INSERT,UPDATE,DELETE ON A.TABLE TO developer;
