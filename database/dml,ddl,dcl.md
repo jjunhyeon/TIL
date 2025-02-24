@@ -17,8 +17,6 @@
 - SELECT : 데이터베이스의 데이터를 조회하거나 검색하기 위한 명령어
 - INSERT,UPDATE,DELETE : 데이터베이스의 테이블에 들어 있는 데이터에 변형을 가하는 종류(데이터 삽입, 수정 , 삭제) 의 명령어
 
-=> 흔히 SQL이라고도 하며 개발자 레벨에서 가장 많이 접하게 되는 명령어이다.
-
 </br>
 
 2. DDL(Data Definition Language) : 데이터 정의(Definition)어
