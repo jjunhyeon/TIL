@@ -1,0 +1,77 @@
+## JPA 
+
+JPA의 기본 개념과 영속성 컨텍스트 정리를 위한 내용입니다. 
+
+<br>
+
+## 1.Entity ##
+
+Java 소스에서 테이블과 매핑한 클래스를 만드는 방법이다.
+
+
+``` java
+import jakarta.persistence.*;
+
+@Entity  // 이 클래스는 DB 테이블과 매핑됨
+@Table(name = "users")  // 테이블 이름 지정 (선택)
+public class User {
+
+    @Id  // Primary Key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto Increment
+    private Long id;
+
+    @Column(nullable = false, length = 100) // DB 컬럼 속성 지정
+    private String userName;
+    ...
+}
+```
+
+**✔️ @Entity** <br>
+: 해당 클래스는 JPA가 관리하는 엔티티 클래스
+
+**✔️@Id** <br>
+: Primary Key 
+
+**✔️@GeneratedValue**  <br>
+: 기본 키 자동 증가 (Auto Increment)
+
+**✔️@Column** <br>
+: 말 그대로 해당 엔티티의 컬럼이다.
+
+<br>
+
+<br>
+
+## 2.Persistence Context ##
+
+다음은 JPA를 사용하면서 가장 중요하다 생각하는 **영속성 컨텍스트**이다.
+
+``` java
+@Transactional
+public void testPersistence(Long userId) {
+    User userA = userRepository.findById(userId).orElseThrow(); 
+    userA.setUserName("Updated Name");  // 영속성 컨텍스트에서 값 변경됨
+
+    User userB = userRepository.findById(userId);  
+    System.out.println(userB.getUserName());  // 같은 트랜잭션에서는 변경된 값 "Updated Name" 출력
+
+    // commit 시점에 변경 사항이 자동으로 DB에 반영됨 (flush 발생)
+}
+```
+✔️ 같은 트랜잭션에서는 userA와 userB가 동일한 객체 <br>
+✔️ 변경 사항은 DB가 아니라 영속성 컨텍스트에 저장 <br>
+✔️ 트랜잭션이 끝날 때 flush()가 호출되며 변경 사항이 DB에 반영됨 <br>
+
+<br>
+<br>
+
+## 3. JpaRepository (JPA 기본 인터페이스)
+
+``` java
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    // 기본적인 CRUD 메서드는 자동 제공됨
+    Optional<User> findByUserName(String userName);  // 사용자 정의 쿼리
+}
+```
