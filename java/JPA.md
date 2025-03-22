@@ -1,6 +1,6 @@
 ## JPA 
 
-JPA의 기본 개념과 영속성 컨텍스트 정리를 위한 내용입니다. 
+JPA의 기본 개념과 영속성 컨텍스트에 대해 다시 정리하며 이해하기 위해 작성합니다. 
 
 <br>
 
@@ -65,13 +65,23 @@ public void testPersistence(Long userId) {
 <br>
 <br>
 
-## 3. JpaRepository (JPA 기본 인터페이스)
+`영속성 컨텍스트` <br>
+**JPA가 관리하는 엔티티 객체의 집합**을 의미한다.
 
-``` java
-import org.springframework.data.jpa.repository.JpaRepository;
+데이터베이스와 상호작용하는 동안, 객체들은 영속성 컨텍스트에 의해 관리되며, 이 객체들은 영속 상태에 있다고한다.
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    // 기본적인 CRUD 메서드는 자동 제공됨
-    Optional<User> findByUserName(String userName);  // 사용자 정의 쿼리
-}
-```
+✔️ 영속성 컨텍스트의 역할
+- 데이터베이스와 객체 간의 매핑을 관리하고, 캐시 역할을 하며, 엔티티의 상태를 추적한다.
+
+- 엔티티가 영속성 컨텍스트에 포함되면, 그 객체에 대한 변경 사항은 트랙잭션 커밋 시 자동으로 데이터베이스에 반영된다.
+
+<br>
+<br>
+
+## ✅ 느낀점
+
+프로젝트 소스 분석 중 `findById`를 통해 조회한 객체가 update 메서드가 없음에도 왜 바뀐건지, 바로 이해가 되지 않아 정리를 시작했는데 영속성 컨텍스트에 대해 학습하며 해당 객체의 상태 변화와 업데이트되는 과정에 대해 이해할 수 있었다.
+
+끝
+
+<br>
