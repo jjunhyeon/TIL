@@ -1,87 +1,58 @@
-## JPA 
+*시작하며*  <br>
 
-JPA의 기본 개념과 영속성 컨텍스트에 대해 다시 정리하며 이해하기 위해 작성합니다. 
-
-<br>
-
-## 1.Entity ##
-
-Java 소스에서 테이블과 매핑한 클래스를 만드는 방법이다.
-
-
-``` java
-import jakarta.persistence.*;
-
-@Entity  // 이 클래스는 DB 테이블과 매핑됨
-@Table(name = "users")  // 테이블 이름 지정 (선택)
-public class User {
-
-    @Id  // Primary Key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto Increment
-    private Long id;
-
-    @Column(nullable = false, length = 100) // DB 컬럼 속성 지정
-    private String userName;
-    ...
-}
-```
-
-**✔️ @Entity** <br>
-: 해당 클래스는 JPA가 관리하는 엔티티 클래스
-
-**✔️@Id** <br>
-: Primary Key 
-
-**✔️@GeneratedValue**  <br>
-: 기본 키 자동 증가 (Auto Increment)
-
-**✔️@Column** <br>
-: 말 그대로 해당 엔티티의 컬럼이다.
+***[1 - JPA] 📌 JPA의 영속성 컨텍스트 개념을 명확히 정리하기 위해 작성합니다.***
 
 <br>
 
-<br>
+### 영속성컨텍스트란 무엇인가?
+DB에서 조회한 시점의 데이터를 애플리케이션 메모리에서 관리하는 공간을 말하며 이를 영속성컨텍스트라고 한다.
 
-## 2.Persistence Context ##
-
-다음은 JPA를 사용하면서 가장 중요하다 생각하는 **영속성 컨텍스트**이다.
-
-``` java
+``` JAVA
 @Transactional
-public void testPersistence(Long userId) {
-    User userA = userRepository.findById(userId).orElseThrow(); 
-    userA.setUserName("Updated Name");  // 영속성 컨텍스트에서 값 변경됨
+public void updateMember(Long id) {
+    Member member1 = memberRepository.findById(id).get();
+    Member member2 = memberRepository.findById(id).get();
 
-    User userB = userRepository.findById(userId);  
-    System.out.println(userB.getUserName());  // 같은 트랜잭션에서는 변경된 값 "Updated Name" 출력
-
-    // commit 시점에 변경 사항이 자동으로 DB에 반영됨 (flush 발생)
+    member1.setName("A");
+    member2.setName("B");
 }
 ```
-✔️ 같은 트랜잭션에서는 userA와 userB가 동일한 객체 <br>
-✔️ 변경 사항은 DB가 아니라 영속성 컨텍스트에 저장 <br>
-✔️ 트랜잭션이 끝날 때 flush()가 호출되며 변경 사항이 DB에 반영됨 <br>
 
+위 코드는 영속성 컨텍스트의 핵심 동작을 설명하기 위한 예제이다.
+
+코드의 member1과 member2는 동일한 식별자를 가진 하나의 엔티티 객체를 참조한다. 같은 트랜잭션 내부에서 조회한 엔티티는 영속성 컨텍스트의 1차 캐시에 의해 항상 동일한 객체 인스턴스를 반환하기 때문이다.
+
+### ✔️ update sql 이 발생하는 이유
+결론적으로, JPA는 위 트랜잭션 종료 직전, 1번 UPDATE SQL이 발생하며 객체 데이터와 DB 데이터를 동기화 시켜준다.
+
+이러한 동작이 가능한 이유가 바로 영속성 컨텍스트의 존재 이유다.
+영속성 컨텍스트는 엔티티를 최초로 조회했을때의 데이터를 관리한다. 이렇게 관리하는 이유는 [트랜잭션 커밋 직전 flush 시점]의 데이터와 서로 비교하기 위함이며 이러한 개념을 JPA에선 *Dirty Checking(변경 감지)* 라고 말한다.
+
+이러한 기능을 제공하는 이유는 JPA는 개발자가 DB 상태를 직접 관리하는 것이 아니라 객체의 상태 변화에만 집중할 수 있도록 해주기 위함이라 생각한다.
+
+
+### ✔️ setter를 여러 번 호출해도 UPDATE는 1번일까?
+setter를 여러번 호출해도 UPDATE SQL이 한번만 실행되는 이유는 JPA가 객체의 변경 시점마다 DB에 반영하지 않기 때문이다.
+
+JPA는 트랜잭션 커밋 직전이나, JPQL 실행 직전좌 같은 특정 시점에 FLUSH를 수행하며 이 시점에 영속성 컨텍스트에 저장된 스냅샷과 현재 객체 상태를 비교 후 진행한다.
+그렇기 때문에 서비스 로직에서 setter를 여러 번 호출하더라도 flush 시점에 최종 상태만 기준으로 UPDATE SQL이 생성되며, 그 결과 UPDATE는 한 번만 수행된다.
+
+### ✔️ Dirty Checking이 동작하지 않는 경우 
+Dirty Checking은 영속 상태의 엔티티와 트랜잭션이 존재할떄만 동작한다. 아래와 같은 경우에는 변경 감지가 DB 반영으로 이어지지 않는다.
 <br>
+- 트랜잭션이 없는 경우
+- 엔티티가 영속 상태가 아닌 경우
+- Transaction(readOnly = true)를 사용하는 경우
+
+특히 readOnly 트랜잭션의 경우, Hibernate는 flush를 제한하고 스냅샷 생성을 생략하는 최적화를 수행한다. 그 결과 객체의 값이 변경되더라도 UPDATE SQL은 실행되지 않는다. 이러한 특성 떄문에 readOnly 트랜잭션은 조회 전용 로직에서 성능 최적화를 위해 사용된다.
+
+
+### 정리하며
+영속성 컨텍스트는 단순히 DB 조회 결과를 보관하는 캐시가 아니다.  엔티티의 생명주기와 상태 변화를 감지하며 변경 감지를 통해 트랜잭션 종료 시점에 객체와 DB동기화를 책임지어준다.
 <br>
+JPA를 객체 중심의 데이터 관리 도구로 이해하는데 있어 중요한 개념이라 다시 정리하고 넘어갑니다.
 
-`영속성 컨텍스트` <br>
-**JPA가 관리하는 엔티티 객체의 집합**을 의미한다.
 
-데이터베이스와 상호작용하는 동안, 객체들은 영속성 컨텍스트에 의해 관리되며, 이 객체들은 영속 상태에 있다고한다.
 
-✔️ 영속성 컨텍스트의 역할
-- 데이터베이스와 객체 간의 매핑을 관리하고, 캐시 역할을 하며, 엔티티의 상태를 추적한다.
-
-- 엔티티가 영속성 컨텍스트에 포함되면, 그 객체에 대한 변경 사항은 트랙잭션 커밋 시 자동으로 데이터베이스에 반영된다.
-
-<br>
-<br>
-
-## ✅ 느낀점
-
-📌 영속성 ***컨텍스트의 역할***에 대해 이해할 수 있었다.
-
-프로젝트 소스 분석 중 `findById`를 통해 조회한 객체가 update 메서드가 없음에도 왜 바뀐건지, 바로 이해가 되지 않아 정리를 시작했는데 정리하며 객체의 상태 변화와 업데이트되는 과정에 대해 이해할 수 있었다.
 
 
